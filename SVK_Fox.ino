@@ -1,3 +1,18 @@
+/* 
+ * SVK FOX Enhanced Obstacle Avoidance / Line Follow Robot. This Robot uses an ultrasonic sensor and an IR8, 8 sensor array for precise line following.
+ * 
+ * How it works:
+ * Uses PID to correctly follow line, and ultrasonic sensor detects objects using getDistanceCM() function to calculate distance
+ * 
+ * How to use it:
+ * Define its `MAX_SPEED` to the desired max speed, then for better line following you can change its PID parameters (Kp, Kd, Ki)
+ * Change `maxDistace` variable to desired length (in cm) before the robot detects object and stops
+ * 
+ * For full documentation, visit the SVK IR8 library https://github.com/SVKROBOTICS/IR_8, for full documentation rundown
+ * 
+*/
+
+
 #include <SVKIR8.h>
 
 #define MAX_INTEGRAL 1400 // Maximun value of integral variable
@@ -30,6 +45,10 @@ const uint8_t MOTOR2_PWM = 6;
 const int trigPin = A3;
 const int echoPin = A1;
 
+// Max distance you want the robot to detect before stopping (in cm)
+const float maxDistance = 20;
+
+// Current distance value
 float distance;
 
 // PID variables
@@ -120,7 +139,7 @@ void loop() {
 
   distance = getDistanceCM();
 
-  if(distance > 0 && distance <= 20) {
+  if(distance > 0 && distance <= maxDistance) {
     digitalWrite(MOTOR1_IN1, HIGH);
     digitalWrite(MOTOR1_IN2, HIGH);
     digitalWrite(MOTOR2_IN1, HIGH);
