@@ -72,7 +72,7 @@ Modify these parameters in your sketch for tuning performance.
 
 ## License
 
-This project is released under the MIT License.
+This project is released under the [MIT License](LICENSE).
 
 ## Support
 For more information or help with the IR8 sensor library, visit:
